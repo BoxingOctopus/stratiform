@@ -1,0 +1,5 @@
+---
+do_image_name: ubuntu-20-04-x64
+do_region: tor1
+do_droplet_name: rpgwiki2
+do_droplet_size: s-2vcpu-4gb
