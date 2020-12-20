@@ -1,0 +1,18 @@
+---
+
+- name: Update all packages to their latest version
+  apt:
+    update_cache: yes
+    name: "*"
+    state: latest
+
+- name: Install some useful baseline packages
+  apt:
+    name: "{{ item }}"
+    ensure: present
+    with_items: "{{ standard_packages }}"
+
+- name: Create Non-Root User
+  user:
+    name: "{{ username }}"
+    uid: 1001

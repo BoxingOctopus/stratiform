@@ -1,0 +1,10 @@
+---
+
+username: rpgwiki
+standard_packages: [
+  'htop',
+  'build-essential',
+  'git',
+  'bat',
+  'vim-nox'
+]

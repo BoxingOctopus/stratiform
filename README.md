@@ -9,11 +9,13 @@ This playbook requires the `community.digitalocean` collection. To install it vi
 # Usage
 
 ## Hosts
-Hosts can be found in the `./hosts` file.
+Hosts in this playbook are not static, and are registered by the `do_droplet` role into the dynamic inventory.
 
-## Variables
-* Playbook-wide vars can be found in `./group_vars`.
-* Droplet-specific vars can be found in `./host_vars`.
+## Special Variables
+
+In order to provision a new droplet, you must provide your DigitalOcean OAuth/API Token, along with at least one SSH key fingerprint from your DigitalOcean account.
+
+These values should never be checked in as code, thus the best way to pass them is at runtime as a JSON object, with the SSH key fingerprints passed as a list element. The exact syntax can be found below.
 
 ## Droplet Sizes
 
@@ -41,15 +43,7 @@ DigitalOcean's API refers to their various droplet sizes using a slug. Valid dro
 | `s-8vcpu-16gb` |
 - - -
 
-## Vault secrets
-All playbook-wide secrets are kept in a vault under `./group_vars/vault_vars`. To unlock the vault, place a file with the vault password in `./.vault_pass` and
-run the following command:
-
-`ansible-vault decrypt --vault-password-file .vault_pass ./group_vars/vault_vars`
-
-**NOTE:** _Take care not to leave vaults decrypted when you check new code into the repo. It may be helpful to use the included pre-commit hook (`./utils/vault-pre-commit-hook.sh`) to prevent this from happening._
-
 ## Playbook
 To run the playbook and set up droplets, run the following command:
 
-`ansible-playbook -i hosts site.yml`
+`ansible-playbook -e "{'do_api_key':'<your_digitalocean_api_key>','do_ssh_key_fingerprints':['00:de:ad:be:ef:88:ab:cd:ef:12:34:56:78:00:aa:bb','...']}" site.yml`
