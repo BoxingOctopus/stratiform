@@ -1,0 +1,8 @@
+antigen_username: rpgwiki
+antigen_theme: gentoo
+antigen_bundles:
+  - git
+  - command-not-found
+  - zsh-navigation-tools
+  - zsh_reload
+  - zsh-users/zsh-syntax-highlighting

@@ -1,0 +1,15 @@
+source /home/{{ antigen_username }}/antigen.zsh
+
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
+
+# Load Bundles
+{% for bundle in antigen_bundles %}
+antigen bundle {{ bundle }}
+{% endfor %}
+
+# Load the theme.
+antigen theme {{ antigen_theme }}
+
+# Tell Antigen that you're done.
+antigen apply

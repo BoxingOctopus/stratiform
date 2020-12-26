@@ -12,17 +12,10 @@
     ssh_keys: "{{ do_ssh_key_fingerprints }}"
   register: my_droplet
 
-# - name: Create a corresponding subdomain
-#   community.digitalocean.digital_ocean_domain:
-#     state: present
-#     name: "{{ my_droplet.droplet.name }}.{{ do_domain }}"
-#     ip: "{{ my_droplet.droplet.ip_address }}"
-#   register: my_droplet_fqdn
-
 - debug:
     msg: "ID is {{ my_droplet.data.droplet.id }}, IP is {{ my_droplet.data.ip_address }}"
 
-- name: Ensure a droplet is present with SSH keys installed
+- name: Ensure a Droplet is Present With SSH Keys Installed
   community.digitalocean.digital_ocean_droplet:
     state: present
     id: "{{ my_droplet.data.droplet.id }}"
@@ -34,8 +27,14 @@
     image: "{{ do_image_name }}"
     wait_timeout: 500
 
-
 - name: Add Droplet to Inventory
   add_host:
     groups: droplets
     name: "{{ my_droplet.data.ip_address }}"
+
+# - name: Create a corresponding subdomain
+#   community.digitalocean.digital_ocean_domain:
+#     state: present
+#     name: "{{ my_droplet.data.name }}.{{ do_domain }}"
+#     ip: "{{ my_droplet.data.ip_address }}"
+#   register: my_droplet_fqdn

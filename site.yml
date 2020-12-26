@@ -1,28 +1,43 @@
 ---
 
-- name: Gather facts
-  hosts: all
-  any_errors_fatal: True
-  tasks:
-    - name: Gather facts for ansible_env
-      setup:
-        fact_path: ansible_env
-
 - name: Provision Droplet
   hosts: localhost
   any_errors_fatal: True
   roles:
     - do_droplet
 
-- name: Post-Provisioning Steps
+- name: Post-Provisioning Steps (Package Installation/Updates)
   hosts: droplets
   gather_facts: no
   become: true
   any_errors_fatal: True
   pre_tasks:
-    - name: wait_for_connection
+    - name: Wait for DigitalOcean Postboot Config to Complete
       wait_for_connection:
-        delay: 10
+        delay: 60
         timeout: 600
   roles:
-    - post_provision_common
+    - role: post_provision_common
+    - role: antigen
+
+
+- name: Post-Provisioning Steps (Install Antigen)
+  hosts: droplets
+  gather_facts: no
+  any_errors_fatal: True
+  roles:
+    - role: antigen
+      users:
+        - username: rpgwiki
+          antigen_libraries: 
+            - name: oh-my-zsh
+          antigen_theme: 
+            name: gentoo
+          antigen_bundles:
+            - name: git
+            - name: zsh-interactive-cd
+            - name: zsh-navigation-tools
+            - name: zsh_reload
+            - name: command-not-found
+            - name: zsh-syntax-highlighting
+              url: zsh-users/zsh-syntax-highlightin

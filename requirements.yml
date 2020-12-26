@@ -1,5 +1,3 @@
 collections:
   - community.digitalocean
-  
-roles:
- - gantsign.oh-my-zsh
+

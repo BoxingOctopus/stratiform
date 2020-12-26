@@ -1,18 +1,30 @@
 ---
 
-- name: Update all packages to their latest version
+- name: Update APT package cache
   apt:
     update_cache: yes
-    name: "*"
-    state: latest
 
-- name: Install some useful baseline packages
+- name: Wait Before Continuing to Allow APT to finish
+  wait_for:
+    timeout: 60
+
+- name: Install Latest Updates from APT
   apt:
-    name: "{{ item }}"
-    ensure: present
-    with_items: "{{ standard_packages }}"
+    upgrade: dist
+
+- name: Install Some Useful Baseline Packages
+  apt:
+    pkg: "{{ standard_packages }}"
+
+- name: Create Group For Non-Root User
+  group:
+    name: "{{ username }}"
 
 - name: Create Non-Root User
   user:
     name: "{{ username }}"
     uid: 1001
+    shell: /bin/zsh
+    groups: "{{ username }},admin"
+    create_home: True
+    home: "/home/{{ username }}"
