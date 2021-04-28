@@ -1,0 +1,15 @@
+---
+
+- name: Download Oh My Vim! Installer Script
+  get_url:
+    url: "https://raw.github.com/liangxianzhe/oh-my-vim/master/tools/install.sh"
+    dest: /tmp/oh-my-vim-install.sh
+    mode: '0777'
+
+- name: Install Oh My Vim (root)
+  shell: "bash /tmp/oh-my-vim-install.sh"
+
+- name: Install Oh My Vim (Non-Root)
+  become: yes
+  become_user: "{{ username }}"
+  shell: "bash /tmp/oh-my-vim-install.sh"

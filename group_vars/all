@@ -1,0 +1,9 @@
+---
+
+username: do_user
+antigen_theme: gentoo
+image_name: foobar
+region: foobar
+droplet_name: foobar
+droplet_size: foobar
+droplet_timezone: America/Toronto

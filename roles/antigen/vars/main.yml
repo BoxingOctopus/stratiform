@@ -1,5 +1,7 @@
-antigen_username: rpgwiki
-antigen_theme: gentoo
+---
+
+antigen_username: "{{ username }}"
+antigen_theme: "{{ antigen_theme }}"
 antigen_bundles:
   - git
   - command-not-found

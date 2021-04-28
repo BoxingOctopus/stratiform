@@ -6,8 +6,10 @@
     size: "{{ do_droplet_size }}"
     region: "{{ do_region }}"
     image: "{{ do_image_name }}"
-    monitoring: yes
-    backups: yes
+    monitoring: "{{ do_monitoring_bool }}"
+    ipv6: "{{ do_ipv6_bool }}"
+    private_networking: "{{ do_privnet_bool }}"
+    backups: "{{ do_backup_bool }}"
     wait_timeout: 500
     ssh_keys: "{{ do_ssh_key_fingerprints }}"
   register: my_droplet

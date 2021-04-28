@@ -1,5 +1,8 @@
 ---
 
+- name: Update Time Zone
+  shell: "timedatectl set-timezone {{ timezone }}"
+
 - name: Update APT package cache
   apt:
     update_cache: yes
@@ -16,6 +19,10 @@
   apt:
     pkg: "{{ standard_packages }}"
 
+- name: Install Additional Packages
+  apt:
+    pkg: "{{ additional_packages }}"
+
 - name: Create Group For Non-Root User
   group:
     name: "{{ username }}"
@@ -28,3 +35,8 @@
     groups: "{{ username }},admin"
     create_home: True
     home: "/home/{{ username }}"
+
+- name: Change Shell for Root
+  user:
+    name: root
+    shell: /bin/zsh

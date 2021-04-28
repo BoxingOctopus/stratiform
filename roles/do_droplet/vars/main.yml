@@ -1,7 +1,10 @@
 ---
 
-do_image_name: ubuntu-20-04-x64
-do_region: tor1
-do_droplet_name: rpgwiki
-do_droplet_size: s-2vcpu-4gb
-do_domain: boxingoctop.us
+do_image_name: "{{ image_name | default('ubuntu-20-04-x64') }}"
+do_region: "{{ region | default('tor1') }}"
+do_droplet_name: "{{ droplet_name }}"
+do_droplet_size: "{{ droplet_size | default('s-1vcpu-2gb') }}"
+do_monitoring_bool: "{{ droplet_monitoring | default('yes') }}"
+do_ipv6_bool: "{{ droplet_ipv6 | default('yes') }}"
+do_privnet_bool: "{{ droplet_privnet | default('yes') }}"
+do_backup_bool: "{{ droplet_backups | default('yes') }}"

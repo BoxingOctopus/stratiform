@@ -1,3 +1,5 @@
 ---
 
-username: rpgwiki
+non_root_user: "{{ username }}"
+additional_packages: "{{ extra_packages }}"
+timezone: "{{ droplet_timezone }}"

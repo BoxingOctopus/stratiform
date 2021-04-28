@@ -6,6 +6,8 @@ This playbook requires the `community.digitalocean` collection. To install it vi
 
 `ansible-galaxy install -r requirements.yml`
 
+For further documentation on the `community.digitalocean` collection, see the official docs on [Ansible Galaxy](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_droplet_module.html)
+
 # Usage
 
 ## Hosts
@@ -29,7 +31,7 @@ DigitalOcean's API refers to their various droplet sizes using a slug. Valid dro
 | `g-2vcpu-8gb`   | `c-2`         | `m-2vcpu-16gb`   | `so-2vcpu-16gb`   |
 | `g-4vcpu-16gb`  | `c-4`         | `m-4vcpu-32gb`   | `so1_5-2vcpu-16gb`|
 | `gd-2vcpu-8gb`  | `c2-2vcpu-4gb`| `m3-2vcpu-16gb`  |                   |
-| `gd-4vcpu-16gb` | `c2-4vpcu-8gb`| `m6-2vcpu-16gb`  |                   |
+| `gd-4vcpu-16gb` | `c2-4vcpu-8gb`| `m6-2vcpu-16gb`  |                   |
 - - -
 
 ### Shared CPU
@@ -47,3 +49,7 @@ DigitalOcean's API refers to their various droplet sizes using a slug. Valid dro
 To run the playbook and set up droplets, run the following command:
 
 `ansible-playbook -e "{'do_api_key':'<your_digitalocean_api_key>','do_ssh_key_fingerprints':['00:de:ad:be:ef:88:ab:cd:ef:12:34:56:78:00:aa:bb','...']}" site.yml`
+
+> **NOTE:** _To get your SSH Key Fingerprint, run the following command:_
+>
+>`ssh-keygen -E md5 -lf ~/.ssh/id_rsa | cut -d' ' -f2 | sed s/MD5\://g`

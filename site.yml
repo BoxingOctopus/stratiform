@@ -12,7 +12,7 @@
   become: true
   any_errors_fatal: True
   pre_tasks:
-    - name: Wait for DigitalOcean Postboot Config to Complete
+    - name: Wait for DigitalOcean Post-Boot Config to Complete
       wait_for_connection:
         delay: 60
         timeout: 600
@@ -28,7 +28,7 @@
   roles:
     - role: antigen
       users:
-        - username: rpgwiki
+        - username: "{{ username }}"
           antigen_libraries: 
             - name: oh-my-zsh
           antigen_theme: 
@@ -40,4 +40,4 @@
             - name: zsh_reload
             - name: command-not-found
             - name: zsh-syntax-highlighting
-              url: zsh-users/zsh-syntax-highlightin
+              url: zsh-users/zsh-syntax-highlighting

@@ -1,7 +1,11 @@
+---
+
 standard_packages:
   - 'htop'
   - 'build-essential'
+  - 'make'
   - 'git'
-  - 'bat'
   - 'vim-nox'
   - 'zsh'
+  - 'fail2ban'
+  - 'pass'
