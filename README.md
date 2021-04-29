@@ -13,6 +13,10 @@ For further documentation on the `community.digitalocean` collection, see the of
 ## Hosts
 Hosts in this playbook are not static, and are registered by the `do_droplet` role into the dynamic inventory.
 
+## Group Vars
+
+`./group_vars/all` is the main configuration source for this playbook. Any variables you need to update can be found there. Please do not update or change the role variables or edit the tasks or `site.yml` directly.
+
 ## Special Variables
 
 In order to provision a new droplet, you must provide your DigitalOcean OAuth/API Token, along with at least one SSH key fingerprint from your DigitalOcean account.
@@ -43,6 +47,35 @@ DigitalOcean's API refers to their various droplet sizes using a slug. Valid dro
 | `s-2vcpu-4gb`  |
 | `s-4vcpu-8gb`  |
 | `s-8vcpu-16gb` |
+- - -
+
+## Droplet Images
+
+> **NOTE:** _This is only a list of slugs for standard images. For a list of One-Click Application images, consult the official API docs, or use the following [`doctl`](https://github.com/digitalocean/doctl) command:_
+>
+> `doctl compute image list-application`
+
+- - -
+| Image Slug            | Image OS/Version                      |
+|:---------------------:|:-------------------------------------:|
+| `centos-7-x64`        | CentOS 7 (64-bit)                     |
+| `centos-8-x64`        | CentOS 8 (64-bit)                     |
+| `debian-9-x64`        | Debian 9 (64-bit)                     |
+| `debian-10-x64`       | Debian 10 (64-bit)                    |
+| `fedora-32-x64`       | Fedora 32 (64-bit)                    |
+| `fedora-33-x64`       | Fedora 33 (64-bit)                    |
+| `fedora-34-x64`       | Fedora 34 (64-bit)                    |
+| `freebsd-11-x64-zfs`  | FreeBSD 11 (64-bit) w/ZFS Support     |
+| `freebsd-11-x64-ufs`  | FreeBSD 11 (64-bit) w/UFS Support     |
+| `freebsd-12-x64-ufs`  | FreeBSD 12 (64-bit) w/ZFS Support     |
+| `freebsd-12-x64-zfs`  | FreeBSD 12 (64-bit) w/UFS Support     |
+| `rancheros`           | RancherOS 1.5.8 (64-bit)              |
+| `ubuntu-16-04-x32`    | Ubuntu 16.04 LTS (32-bit)             |
+| `ubuntu-16-04-x64`    | Ubuntu 16.04 LTS (64-bit)             |
+| `ubuntu-18-04-x64`    | Ubuntu 18.04 LTS (64-bit)             |
+| `ubuntu-20-04-x64`    | Ubuntu 20.04 LTS (64-bit)             |
+| `ubuntu-20-10-x64`    | Ubuntu 20.10 (64-bit)                 |
+| `ubuntu-21-10-x64`    | Ubuntu 21.10 (64-bit)                 |
 - - -
 
 ## Playbook
