@@ -1,33 +1,48 @@
 # Stratiform
 `stratiform` is an Ansible playbook for provisioning, configuring, and managing DigitalOcean droplets.
 
-# Setup
+## Setup
 This playbook requires the `community.digitalocean` collection. To install it via `ansible-galaxy`, run the following command:
 
 `ansible-galaxy install -r requirements.yml`
 
 For further documentation on the `community.digitalocean` collection, see the official docs on [Ansible Galaxy](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_droplet_module.html)
 
-# Usage
+In addition to basic droplet provisioning, some post-provisioning is also performed in order to make the environment a little more user-friendly and secure, by installing the following:
 
-## Hosts
+### Security
+- Non-Root SSH access (DigitalOcean Droplets use `root` by default)
+- Mandatory Access Controls (via AppArmor/SELinux)
+- UFW
+- [Fail2Ban](https://www.fail2ban.org)
+
+### Usability
+- ZSH (w/[Antigen](http://antigen.sharats.me))
+- [Oh-My-Vim](https://github.com/liangxianzhe/oh-my-vim)
+- [bat](https://github.com/sharkdp/bat)
+- [duf](https://github.com/muesli/duf)
+- [exa](https://the.exa.website)
+
+## Usage
+
+### Hosts
 Hosts in this playbook are not static, and are registered by the `do_droplet` role into the dynamic inventory.
 
-## Group Vars
+### Group Vars
 
 `./group_vars/all` is the main configuration source for this playbook. Any variables you need to update can be found there. Please do not update or change the role variables or edit the tasks or `site.yml` directly.
 
-## Special Variables
+### Special Variables
 
 In order to provision a new droplet, you must provide your DigitalOcean OAuth/API Token, along with at least one SSH key fingerprint from your DigitalOcean account.
 
 These values should never be checked in as code, thus the best way to pass them is at runtime as a JSON object, with the SSH key fingerprints passed as a list element. The exact syntax can be found below.
 
-## Droplet Sizes
+### Droplet Sizes
 
 DigitalOcean's API refers to their various droplet sizes using a slug. Valid droplet size slugs are as follows:
 
-### Dedicated CPU Droplets
+#### Dedicated CPU Droplets
 
 - - -
 | General Purpose | CPU-Optimized | Memory-Optimized | Storage-Optimized |
@@ -38,7 +53,7 @@ DigitalOcean's API refers to their various droplet sizes using a slug. Valid dro
 | `gd-4vcpu-16gb` | `c2-4vcpu-8gb`| `m6-2vcpu-16gb`  |                   |
 - - -
 
-### Shared CPU
+#### Shared CPU
 - - -
 |   Sizes        |
 |:--------------:|
@@ -49,11 +64,13 @@ DigitalOcean's API refers to their various droplet sizes using a slug. Valid dro
 | `s-8vcpu-16gb` |
 - - -
 
-## Droplet Images
+### Droplet Images
 
 > **NOTE:** _This is only a list of slugs for standard images. For a list of One-Click Application images, consult the official API docs, or use the following [`doctl`](https://github.com/digitalocean/doctl) command:_
 >
 > `doctl compute image list-application`
+>
+> Currently this playbook only fully supports Ubuntu-based images.
 
 - - -
 | Image Slug            | Image OS/Version                      |
@@ -78,7 +95,7 @@ DigitalOcean's API refers to their various droplet sizes using a slug. Valid dro
 | `ubuntu-21-10-x64`    | Ubuntu 21.10 (64-bit)                 |
 - - -
 
-## Playbook
+### Playbook
 To run the playbook and set up droplets, run the following command:
 
 `ansible-playbook -e "{'do_api_key':'<your_digitalocean_api_key>','do_ssh_key_fingerprints':['00:de:ad:be:ef:88:ab:cd:ef:12:34:56:78:00:aa:bb','...']}" site.yml`

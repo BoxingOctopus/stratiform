@@ -9,3 +9,6 @@ standard_packages:
   - 'zsh'
   - 'fail2ban'
   - 'pass'
+  - 'apparmor-utils'
+  - 'batcat'
+  - 'exa'
