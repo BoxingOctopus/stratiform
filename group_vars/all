@@ -2,8 +2,8 @@
 
 username: do_user
 antigen_theme: gentoo
-image_name: foobar
-region: foobar
+image_name: ubuntu-20-04-x64
+region: tor1
 droplet_name: foobar
 droplet_size: foobar
 droplet_timezone: America/Toronto
