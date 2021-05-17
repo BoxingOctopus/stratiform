@@ -21,26 +21,58 @@
 <!-- /vscode-markdown-toc -->
 
 ##  1. <a name='Setup'></a>Setup
-This playbook requires the `community.digitalocean` collection. To install it via `ansible-galaxy`, run the following command:
+This playbook requires the following `ansible-galaxy` roles and collections:
 
-`ansible-galaxy install -r requirements.yml`
+### Collections
+- `community.digitalocean`
+- `community.general`
 
-For further documentation on the `community.digitalocean` collection, see the official docs on [Ansible Galaxy](https://docs.ansible.com/ansible/latest/collections/community/digitalocean/digital_ocean_droplet_module.html)
+### Roles
+- `oefenweb.fail2ban`
 
-In addition to basic droplet provisioning, some post-provisioning is also performed in order to make the environment a little more user-friendly and secure, by installing the following:
+ To install these dependencies, run the following commands from the root folder of this repository:
+
+```bash
+ansible-galaxy collection install -r collection-requirements.yml
+ansible-galaxy install -r role-requirements.yml
+```
+
+- - -
+
+For further documentation on the these collections and roles, see the official docs on Ansible Galaxy
+
+- [`community.digitalocean`](https://docs.ansible.com/ansible/latest/collections/community/digitalocean)
+- [`community.general`](https://docs.ansible.com/ansible/latest/collections/community/general/)
+- [`oefenweb.fail2ban`](https://galaxy.ansible.com/oefenweb/fail2ban)
+
+- - -
+
+_**In addition to basic droplet provisioning, some post-provisioning is also performed in order to make the environment a little more user-friendly and secure, by installing the following:**_
 
 ###  1.1. <a name='Security'></a>Security
 - Non-Root SSH access (DigitalOcean Droplets use `root` by default)
 - Mandatory Access Controls (via AppArmor/SELinux)
-- UFW
+- [UFW](https://help.ubuntu.com/community/UFW) (Ubuntu Only)
 - [Fail2Ban](https://www.fail2ban.org)
 
 ###  1.2. <a name='Usability'></a>Usability
-- ZSH (w/[Antigen](http://antigen.sharats.me))
-- [Oh-My-Vim](https://github.com/liangxianzhe/oh-my-vim)
+- [bandwhich](https://github.com/imsnif/bandwhich)
+- [Homebrew for Linux, AKA Linuxbrew](https://brew.sh)
 - [bat](https://github.com/sharkdp/bat)
 - [duf](https://github.com/muesli/duf)
+- [dust](https://github.com/bootandy/dust)
 - [exa](https://the.exa.website)
+- [fd](https://github.com/sharkdp/fd)
+- [jq](https://stedolan.github.io/jq/)
+- [Oh-My-Vim](https://github.com/liangxianzhe/oh-my-vim)
+- [procs](https://github.com/dalance/procs)
+- [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [sd](https://github.com/chmln/sd)
+- [tldr](https://github.com/dbrgn/tealdeer)
+- [ZSH](http://zsh.sourceforge.net) (w/[Antigen](http://antigen.sharats.me))
+
+> **NOTE:** _If you would like to opt NOT to install these extra tools, add `'install_extras': no` to the environment variables dictionary_
+> _in the `ansible-playbook` command listed below, or alternatively, add `install_extras: no` to `./group_vars/all` before running the playbook._
 
 ##  2. <a name='Usage'></a>Usage
 
@@ -139,6 +171,14 @@ DigitalOcean's API refers to their various droplet sizes, images, and regions us
 To run the playbook and set up droplets, run the following command:
 
 `ansible-playbook -e "{'do_api_key':'<your_digitalocean_api_key>','do_ssh_key_fingerprints':['00:de:ad:be:ef:88:ab:cd:ef:12:34:56:78:00:aa:bb','...']}" site.yml`
+
+You can also use a [Vault](https://docs.ansible.com/ansible/latest/user_guide/vault.html) by placing the following YAML data into `./group_vars/vault.yml` along with an accompanying vault password in `./.vaultpasswd`:
+
+```yaml
+do_api_key: '<your_digitalocean_api_key>'
+do_ssh_key_fingerprints: ['00:de:ad:be:ef:88:ab:cd:ef:12:34:56:78:00:aa:bb','...']
+```
+
 
 > **NOTE:** _To get your SSH Key Fingerprint, run the following command:_
 >

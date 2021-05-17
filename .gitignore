@@ -13,7 +13,8 @@
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -49,3 +50,9 @@ Temporary Items
 
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
+# Don't include downloaded roles/collections from Ansible Galaxy
+.cache
+
+# Never include Ansible Vault data
+.vaultpasswd
+./group_vars/vault.yml
