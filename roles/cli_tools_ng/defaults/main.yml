@@ -1,0 +1,13 @@
+---
+
+brew_packages:
+  - 'exa'
+  - 'duf'
+  - 'dust'
+  - 'procs'
+  - 'tealdeer'
+  - 'bat'
+  - 'fd'
+  - 'grex'
+  - 'bandwhich'
+  - 'ripgrep'

@@ -6,5 +6,6 @@ antigen_bundles:
   - git
   - command-not-found
   - zsh-navigation-tools
+  - ufw
   - zsh_reload
   - zsh-users/zsh-syntax-highlighting

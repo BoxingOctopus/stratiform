@@ -1,0 +1,17 @@
+---
+
+- name: Download Antigen
+  get_url:
+    url: https://git.io/antigen
+    dest: "/home/{{ antigen_username }}/.antigen/antigen.zsh"
+    owner: "{{ antigen_username }}"
+    group: "{{ antigen_username }}"
+    mode: '0755'
+
+- name: Add Antigen Config for "{{ antigen_username }}"
+  template:
+    src: templates/zshrc.j2
+    dest: "/home/{{ antigen_username }}/.zshrc"
+    owner: "{{ antigen_username }}"
+    group: "{{ antigen_username }}"
+    mode: '0644'

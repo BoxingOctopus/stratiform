@@ -1,0 +1,36 @@
+---
+
+- name: Download Homebrew Installer
+  get_url:
+    url: 'https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh'
+    dest: "{{ linuxbrew_install_tmp }}"
+    mode: 0777
+  become: false
+
+- name: Run Homebrew Installer
+  command: '/bin/bash -c {{ linuxbrew_install_tmp }}'
+  environment:
+    NONINTERACTIVE: '1'
+  register: install_result
+  changed_when: "install_result.rc == 0"
+  become_user: "{{ username }}"
+
+- name: Add Homebrew to .zshrc (Non-Root User)
+  become: true
+  become_user: '{{ username }}'
+  lineinfile:
+    file: "/home/{{ username }}/.zshrc"
+    line: 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    insertafter: EOF
+
+- name: Add Homebrew to .zshrc (Root)
+  lineinfile:
+    file: "/root/.zshrc"
+    line: 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"'
+    insertafter: EOF
+
+- name: Remove Installer Script
+  file:
+    path: "{{ linuxbrew_install_tmp }}"
+    state: absent
+  become: false

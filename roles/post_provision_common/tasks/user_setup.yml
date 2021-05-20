@@ -1,0 +1,19 @@
+---
+
+- name: Create Group For Non-Root User
+  group:
+    name: "{{ username }}"
+
+- name: Create Non-Root User
+  user:
+    name: "{{ username }}"
+    uid: 1001
+    shell: /bin/zsh
+    groups: "{{ username }},admin"
+    create_home: True
+    home: "/home/{{ username }}"
+
+- name: Change Shell for Root
+  user:
+    name: root
+    shell: /bin/zsh

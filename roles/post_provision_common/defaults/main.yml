@@ -1,14 +1,14 @@
 ---
 
 standard_packages:
-  - 'htop'
+  - 'apparmor-utils'
   - 'build-essential'
-  - 'make'
+  - 'fail2ban'
   - 'git'
+  - 'htop'
+  - 'jq'
+  - 'make'
+  - 'pass'
+  - 'unzip'
   - 'vim-nox'
   - 'zsh'
-  - 'fail2ban'
-  - 'pass'
-  - 'apparmor-utils'
-  - 'batcat'
-  - 'exa'

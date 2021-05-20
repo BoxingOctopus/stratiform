@@ -18,26 +18,21 @@
         timeout: 600
   roles:
     - role: post_provision_common
+
     - role: antigen
+      when: install_antigen == 'yes'
 
+    - role: oh_my_vim
+      when: install_oh_my_vim == 'yes'
 
-- name: Post-Provisioning Steps (Install Antigen)
+    - role: homebrew_for_linux
+      when: install_linuxbrew == 'yes'
+
+    - role: cli_tools_ng
+      when: install_cli_ng_tools == 'yes'
+
+- name: Set up DNS Records
   hosts: droplets
-  gather_facts: no
-  any_errors_fatal: True
   roles:
-    - role: antigen
-      users:
-        - username: "{{ username }}"
-          antigen_libraries: 
-            - name: oh-my-zsh
-          antigen_theme: 
-            name: gentoo
-          antigen_bundles:
-            - name: git
-            - name: zsh-interactive-cd
-            - name: zsh-navigation-tools
-            - name: zsh_reload
-            - name: command-not-found
-            - name: zsh-syntax-highlighting
-              url: zsh-users/zsh-syntax-highlighting
+    - role: do_domain
+      when: create_dns_records == 'yes'

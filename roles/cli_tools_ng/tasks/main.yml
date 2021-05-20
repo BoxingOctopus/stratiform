@@ -1,0 +1,6 @@
+---
+
+- name: Install Extra Command Line Tools (via Homebrew)
+  community.general.homebrew:
+    name: "{{ brew_packages }}"
+    state: present

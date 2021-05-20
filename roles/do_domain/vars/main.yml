@@ -1,0 +1,4 @@
+---
+
+hostname: "{{ droplet_name }}"
+do_domain: "{{ domain }}"

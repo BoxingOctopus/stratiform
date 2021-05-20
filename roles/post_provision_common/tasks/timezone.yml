@@ -1,0 +1,6 @@
+---
+
+- name: Update Time Zone
+  community.general.timezone:
+    hwclock: local
+    name: "{{ timezone }}"

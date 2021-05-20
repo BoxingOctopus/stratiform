@@ -1,9 +1,27 @@
 ---
 
-username: do_user
-antigen_theme: gentoo
+username: do-user
 image_name: ubuntu-20-04-x64
 region: tor1
-droplet_name: foobar
-droplet_size: foobar
+droplet_name: seedbox
+droplet_size: s-1vcpu-2gb
 droplet_timezone: America/Toronto
+
+create_dns_records: no
+domain: boxingoctop.us
+
+install_antigen: yes
+antigen_theme: gentoo
+
+install_linuxbrew: no
+install_cli_ng_tools: no
+install_oh_my_vim: yes
+install_extra_packages: yes
+
+extra_packages:
+  - transmission
+  - transmission-cli
+  - transmission-daemon
+  - transmission-common
+  - nginx
+  - s3fs

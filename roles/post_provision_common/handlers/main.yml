@@ -1,0 +1,4 @@
+---
+
+- name: Wait for APT
+  shell: "while pgrep apt-get; do sleep 10; done;"

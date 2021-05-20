@@ -1,0 +1,30 @@
+---
+
+- name: Wait for APT
+  shell: "while pgrep apt-get; do sleep 10; done;"
+
+- name: Update APT package cache
+  apt:
+    update_cache: yes
+
+- name: Wait for APT
+  shell: "while pgrep apt-get; do sleep 10; done;"
+
+- name: Install Latest Updates from APT
+  apt:
+    upgrade: dist
+  debugger: always
+
+- name: Wait for APT
+  shell: "while pgrep apt-get; do sleep 10; done;"
+
+- name: Install Baseline Packages
+  apt:
+    pkg: "{{ standard_packages }}"
+
+- name: Wait for APT
+  shell: "while pgrep apt-get; do sleep 10; done;"
+
+- name: Install Additional Packages
+  apt:
+    pkg: "{{ additional_packages }}"

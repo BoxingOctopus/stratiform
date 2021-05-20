@@ -1,0 +1,17 @@
+---
+
+- name: Download Antigen (Root)
+  get_url:
+    url: https://git.io/antigen
+    dest: "/root/.antigen/antigen.zsh"
+    owner: "root"
+    group: "root"
+    mode: '0755'
+
+- name: Add Antigen Config for Root User
+  template:
+    src: templates/zshrc.j2
+    dest: "/root/.zshrc"
+    owner: "root"
+    group: "root"
+    mode: '0644'
