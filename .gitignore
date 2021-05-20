@@ -56,3 +56,4 @@ Temporary Items
 # Never include Ansible Vault data
 .vaultpasswd
 ./group_vars/vault.yml
+vault.yml
