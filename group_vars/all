@@ -3,7 +3,7 @@
 username: do-user
 image_name: ubuntu-20-04-x64
 region: tor1
-droplet_name: seedbox
+droplet_name: mybox
 droplet_size: s-1vcpu-2gb
 droplet_timezone: America/Toronto
 
